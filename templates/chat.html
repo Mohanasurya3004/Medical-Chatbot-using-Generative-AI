@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Prevent FOUC */
+        .sidebar, .chat-box {
+            visibility: hidden;
+        }
+        .js-loaded .sidebar,
+        .js-loaded .chat-box {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <button class="menu-button" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="sidebar-header">
+                <div class="top-buttons">
+                    <button class="new-chat-btn" onclick="startNewChat()">
+                        <i class="fas fa-plus"></i>
+                        <span>New chat</span>
+                    </button>
+                </div>
+            </div>
+            <div class="chat-history" id="chat-history">
+                <!-- Chat history items will be added here -->
+            </div>
+            <div class="sidebar-footer">
+                <button class="clear-history-btn" onclick="clearHistory()">
+                    <i class="fas fa-trash"></i>
+                    <span>Clear history</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-content">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h1>Medical Chatbot</h1>
+                    <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="chat-box" id="chat-box">
+                    <div class="chat-message bot">
+                        <div class="message">
+                            Hello! I'm your medical assistant. How can I help you today?
+                            <button class="speak-button" onclick="speak(this.parentElement.textContent)">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <form id="chat-form" onsubmit="return sendMessage();">
+                        <input type="text" id="user-input" placeholder="Message Medical Assistant..." autocomplete="off">
+                        <button type="button" id="voice-input-btn" onclick="toggleVoiceInput()">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Add class to body when JavaScript is loaded
+        document.body.classList.add('js-loaded');
+    </script>
+</body>
+</html>
+
